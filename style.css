@@ -1,0 +1,476 @@
+/*
+********* COLORS *********
+nav menu, wide column bg 
+light grey  #dddddd;
+
+footer bg, text on light bg
+darkgrey    #333333;
+
+body background, header title
+off white   #ececec;
+
+headings, links 
+red         #660000;
+
+*/
+
+/* ********* RESET ********* */
+
+/* wildcard to set all text on page to the same formatting, 
+zero margins and padding and to do box setting reset */
+
+* {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    color: #333333;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/*  ********* GRID *********  */
+
+/* CSS grid layout defined here 
+div parent element for grid layout 
+12 columns, 1/12 fraction each 
+auto creates needed number of rows with height auto */
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(5, auto);
+}
+
+/* auto generated content that gives me a full width row with background color for nav menu, 
+stolen from https://www.smashingmagazine.com/2018/02/generated-content-grid-layout/ 
+No content, background color, span all columns, first row */
+
+.container::before {
+    content: "";
+    background-color: #dddddd;
+    grid-column: 1/-1;
+    grid-row: 2;
+}
+
+/* auto generated content that gives me a full width row with background color for footer, 
+stolen from https://www.smashingmagazine.com/2018/02/generated-content-grid-layout/ 
+No content, background color, span all columns, last row
+placed below everything else with z index - 1 */
+
+.container::after {
+    content: "";
+    background-color: #666666;
+    grid-column: 1 / -1;
+    grid-row: -1;
+    z-index: -1;
+}
+
+/* header image top of screen, full width and scales with viewport 
+full width background image, shown once, renderd from center top
+scales grid cell height with help of viewport width, 
+some cropping at bottom is intentional 
+spans all columns in first grid row 
+content layout with flex box, aligned and justified center */
+
+.header {
+    background-image: url("images/nyc.jpg");
+    width: auto;
+    height: calc(100vw*0.25);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 100%;
+    grid-row: 1;
+    grid-column: 1/-1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* nav menu part of page 
+second and center column of grid
+second row of grid */
+
+.nav {
+    grid-column: 4/10;
+    grid-row: 2;
+}
+
+/* main part of page, 
+second and center column of grid
+third row of grid */
+
+.main {
+    grid-column: 4/10;
+}
+
+/* wide column, used for Portfolio section */
+
+.widecolumn {
+    grid-column: 3/11;
+    /* grid-row: 4; */
+}
+
+/* footer part of page, 
+second and center column of grid 
+fourth row of grid */
+
+.footer {
+    grid-column: 4/10;
+    grid-row: -1;
+}
+
+/* ********* NAV MENU ********* */
+
+/* container div for nav menu, set padding */
+
+.nav {
+    padding: 0 10px;
+}
+
+/* style all nav links 
+color, weight, size, transform to all caps, set line height */
+
+.nav a {
+    color: #333333;
+    font-weight: 600;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    width: 100%;
+    display: inline;
+    line-height: 2em;
+}
+
+/* change color when mouse is on top of link items */
+
+.nav a:hover {
+    color: #660000;
+}
+
+/* set size and position for menu triangle icon
+clear both to place it on same row as menu item */
+
+.nav__icon {
+    font-size: 1.2em;
+    position: relative;
+    clear: both;
+}
+
+/* hide triangle pointing up from start 
+only used on small screens, see media query */
+
+.nav__icon--up {
+    display: none;
+}
+
+/* hide triangle pointing down from start 
+and adjust position, only used on small screens, 
+see media query  */
+
+.nav__icon--down {
+    display: none;
+    position: relative;
+    top: -0.05em;
+}
+
+/* hide the checkbox used for sub menus on small screens */
+
+.nav input[type=checkbox] {
+    display: none;
+}
+
+/* set menu list style to none to hide list point symbol */
+
+.nav ul {
+    list-style: none;
+}
+
+/* layout menu top level items 
+float left for horizontal layout 
+set position and width */
+
+.nav>ul>li {
+    float: left;
+    width: 33%;
+}
+
+/* hide sub level menu items froom start */
+
+.nav ul ul {
+    display: none;
+}
+
+/* set font size of sub menu links */
+
+.nav ul ul a {
+    font-size: 0.8em;
+}
+
+/* ********* FLEX BOX PORTFOLIO ********* */
+
+/* parent div for portfolio section, styled with flexbox 
+set direction, allow content to wrap, justify and align content, 
+add padding to bottom */
+
+.portfolio {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0 0 5px 0;
+}
+
+/* div container for porfolio item:
+set position, size, outside margin, 
+display flex for content, justify and align content, */
+
+.portfolio__item {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* style the heading content of portfolio text */
+
+.portfolio__heading {
+    color: #dddddd;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* style portfolio images, size, shadow and rounded corners */
+
+.portfolio__img {
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.5);
+    height: 200px;
+}
+
+/* style the text content of portfolio items
+semi transparent background, rounded corners at bottom, 
+font settings and positioning */
+
+.portfolio__text {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 0 0 5px 5px;
+    bottom: 0px;
+    color: #dddddd;
+    font-size: 0.9rem;
+    font-weight: 400;
+    left: 0px;
+    padding: 5px 10px;
+    margin: 0px;
+    position: absolute;
+    text-align: center;
+    width: 200px;
+}
+
+/* ********* THE REST ********* */
+
+/* style all a href links on page,
+remove underlining, set text color to dark red */
+
+a {
+    text-decoration: none;
+    color: #660000;
+}
+
+/* set background color of entire body to off white */
+
+body {
+    background-color: #ececec;
+}
+
+/* generic style to center text */
+
+.center {
+    text-align: center;
+}
+
+/* generic style to clear floats */
+
+.clear {
+    clear: both;
+}
+
+/* set the same 10px padding to all these element */
+
+.footer, .main, .widecolumn {
+    margin: 10px;
+}
+
+/* style test in footer  */
+
+.footer__text {
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+    color: #cccccc;
+    font-size: 0.85em;
+}
+
+/* Style Heading 1 to 4 to the same size, weight, color, and margins */
+
+h1, h2, h3, h4 {
+    font-weight: 600;
+    color: #660000;
+    font-size: 2.3rem;
+    margin: 1rem 0 0.5rem 0;
+}
+
+/* Scale heading 2-4 to smaller sizes */
+
+h2 {
+    font-size: 1.9rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1.1rem;
+}
+
+/* Style for h1 overlaying header image
+adjust font size with clamp, min, scaling, max 
+adjust font weight to bold 
+add space between characters 
+set a shadow, offset 2 px, blur 5px, black with alpha transperancy 0.5 */
+
+.header__title {
+    font-size: clamp(0.1em, 10vw + 0.3em, 10em);
+    font-weight: 700;
+    color: #ececec;
+    letter-spacing: 0.05em;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* generic style to set text to italics */
+
+.italic {
+    font-style: italic;
+}
+
+/* Set font and margins for all paragraph tags, 
+margin bottom to 10px, everything else to zero 
+max width to 800px to limit lines running long*/
+
+p {
+    font-family: 'Work Sans', sans-serif;
+    margin: 0 0 10px 0;
+    max-width: 800px;
+}
+
+/* div container for "hamburger" menu icon */
+
+.menuIcon {
+    padding: 5px 10px;
+    margin: 0 -10px;
+}
+
+/* draw the "hamburger" menu icon with divs with border */
+
+.menuIcon__lines {
+    width: 30px;
+    height: 4px;
+    background-color: #333333;
+    margin: 3px 0px;
+    border-radius: 2px;
+}
+
+/* style break out column, set rounded corners and background */
+
+.widecolumn {
+    background-color: #dddddd;
+    border-radius: 10px;
+}
+
+/* ********* MEDIA QUERIES ********* */
+
+/* 
+If screen is smaller than 1200 pix:
+use more page, span more of grid columns
+*/
+
+@media only screen and (max-width: 1200px) {
+    /* If screen is smaller than 1200 pix */
+    .nav, .main, .footer {
+        grid-column: 3 / 11;
+        /* User more grid columns for content, less for whitespace */
+    }
+    .widecolumn {
+        grid-column: 2 / 12;
+    }
+}
+
+/* 
+If screen is smaller than 600px: 
+use checkbox hack to display sub menu items
+toggle visability of triangle icons in menu
+change color of header title to pure white
+change menu list item to use full width 
+*/
+
+@media only screen and (max-width: 600px) {
+    .header__title {
+        color: #ffffff;
+    }
+    .nav>ul {
+        display: none;
+    }
+    .nav>ul>li {
+        width: 100%;
+        text-align: left;
+    }
+    .nav input[type=checkbox]:checked~.nav__icon--down {
+        display: none;
+    }
+    .nav input[type=checkbox]:checked~.nav__icon--up {
+        display: inline;
+    }
+    .nav input[type=checkbox]:checked~ul {
+        display: block;
+    }
+    .nav__icon--down {
+        display: inline;
+    }
+    .nav, .main, .footer, .breakout {
+        grid-column: 1 / -1;
+    }
+    .widecolumn {
+        grid-column: 1 / -1;
+    }
+}
+
+/* 
+If screen is bigger than 600px: 
+use hover to display sub menu items 
+set sub menu list to position absolute to float above page content 
+style sub menu list items */
+
+@media only screen and (min-width: 601px) {
+    .menuIcon {
+        display: none;
+    }
+    .nav ul>li:hover ul {
+        display: block;
+    }
+    .nav ul ul {
+        position: absolute;
+        width: 180px;
+    }
+    .nav ul ul li {
+        background-color: #dddddd;
+        box-shadow: 1px 1px 1px 0px #333333;
+        text-align: left;
+        padding: 5px 10px 5px 10px;
+        position: relative;
+        left: -10px;
+    }
+}
