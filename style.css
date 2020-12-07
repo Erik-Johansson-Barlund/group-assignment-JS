@@ -208,11 +208,12 @@ section {
 .erik {
 	display: grid;
 	grid-template-columns: 165px auto 165px;
-	grid-template-rows: auto auto auto;
-	grid-template-areas: 'sidebar info info' '. . .' 'haiku haiku haiku';
+	grid-template-rows: 60% 20% 20%;
+	grid-template-areas: 'image info info' '. x .' 'haiku haiku haiku';
 	margin: 5px;
 	text-align: center;
 }
+
 .erik img {
 	border: 2px solid black;
 	border-radius: 50%;
