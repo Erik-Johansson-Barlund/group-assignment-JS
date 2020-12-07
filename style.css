@@ -205,22 +205,21 @@ section {
 	padding: 5px;
 }
 
+/* Lite styling till eriks sida */
 .erik {
-	display: grid;
-	grid-template-columns: 165px auto 165px;
-	grid-template-rows: 60% 20% 20%;
-	grid-template-areas: 'image info info' '. x .' 'haiku haiku haiku';
-	margin: 5px;
 	text-align: center;
 }
-
 .erik img {
 	border: 2px solid black;
 	border-radius: 50%;
+	height: 150px;
+	margin-right: 20px;
 }
 .erik_info {
-	grid-area: info;
+	display: flex;
+	justify-content: space-between;
 	text-align: left;
+	margin-bottom: 20px;
 }
 #haiku_div {
 	grid-area: haiku;
