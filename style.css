@@ -225,9 +225,15 @@ section {
 	grid-area: haiku;
 	text-align: center;
 	font-size: 2em;
-	color: grey;
 	font-family: Garamond, serif;
 	font-style: italic;
+	background-color: #f3ec78;
+	background-image: linear-gradient(90deg, #070c11, #a14117, #f5cb25);
+	background-size: 100%;
+	-webkit-background-clip: text;
+	-moz-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	-moz-text-fill-color: transparent;
 }
 
 /* 

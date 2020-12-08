@@ -34,6 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			'en man',
 			'en kvinna',
 			'en gumma',
+			'ett barn',
+			'ett rådjur',
+			'ett väsen',
 			'en drake',
 			'en evighet',
 			'en apa',
@@ -90,13 +93,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		],
 	];
 
-	for (let i = 0; i < haikuArray.length; i++) {
-		let x = Math.floor(Math.random() * haikuArray[i].length);
-		if (x > haikuArray[i].length) {
-			x--;
-		}
-		console.log(x);
-		haiku += haikuArray[i][x] + ' ';
+	for (let word of haikuArray) {
+		haiku += word[Math.floor(Math.random() * word.length)] + ' ';
 	}
+
 	haikuDiv.innerHTML = haiku;
 });
