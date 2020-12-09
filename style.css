@@ -78,6 +78,10 @@ a {
 	background-color: aliceblue;
 }
 
+button {
+	padding: 10px;
+}
+
 .clear {
 	clear: both;
 }
