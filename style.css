@@ -64,98 +64,18 @@ nav ul li {
 	width: 100%;
 }
 
-/*
-    LISTS 
-	
-	Jag tror allt detta kan tas bort men låt mig kolla. 
-
-.dropdown {
-    background-color: #660000;
-}
-
-.dropdown ul {
-    background-color: #660000;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.dropdown>ul>li {
-    background-color: #660000;
-    color: #ffffff;
-    display: block;
-    float: left;
-    width: 150px;
-    padding: 10px;
-}
-
-.dropdown>ul>li>ul>li {
-    padding: 10px 0;
-}
-
-.dropdown>ul>li:hover li {
-    display: block;
-}
-
-.dropdown ul ul li {
-    display: none;
-}
-
-.nested {
-    background-color: #cccccc;
-    padding: 20px;
-    margin: 20px 0;
-    list-style: none;
-    text-align: center;
-}
-
-.nested>li {
-    padding: 10px 0;
-}
-
-.nested ol {
-    list-style: inside;
-    list-style-type: upper-roman;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-}
-
-.nested ol li {
-    text-align: center;
-    width: 100%;
-}
-
-.nested>li:nth-child(odd) {
-    background-color: #99ffff;
-}
-
-.nested>li:nth-child(even) {
-    background-color: #ffff99;
-}
-
-.rainbow {
-    background-color: #ffffff;
-    padding: 20px;
-    margin: 20px 0;
-}
-
-.rainbow>li:nth-child(odd) {
-    color: red;
-}
-
-.rainbow>li:nth-child(even) {
-    color: green;
-}
-
-/*
-
-/*
-        THE REST
-*/
-
 a {
 	text-decoration: none;
+}
+#board {
+	width: 100%;
+	height: 400px;
+	background-color: aqua;
+}
+#actions {
+	width: 100%;
+	height: 200px;
+	background-color: aliceblue;
 }
 
 .clear {
