@@ -9,11 +9,6 @@ class Game {
 		//this.startGame();
 	}
 	removeSticks() {
-		/*
-		  ta bort pinnar grafiskt och sänka counter
-		  kolla om counter är 0 <- anropa endGame
-		*/
-
 		let noOfSticks = 0;
 		console.log('event target id removeStics: ' + event.target.id);
 		if (event.target.id == "btn1") { noOfSticks = 1; }
@@ -22,7 +17,7 @@ class Game {
 		//console.log('No of sticks to remove: ' + noOfSticks);
 		this.counter -= noOfSticks;
 		console.log('this counter from removeSticks: ' + this.counter);
-		board.innerHTML = this.counter;
+		this.printSticks(this.counter);
 		if (this.counter > 1) {
 			this.turn = this.turn ? false : true;
 			if (this.turn) {
@@ -58,8 +53,9 @@ class Game {
 			playerText.innerHTML = `${this.player1}s tur`;
 		else
 			playerText.innerHTML = `${this.player2}s tur`;
-		board.innerHTML = this.counter;
+		this.printSticks(this.counter);
 	}
+
 	endGame() {
 		let winner = this.turn ? this.player1 : this.player2
 		board.innerHTML = winner + " vann!";
@@ -96,6 +92,15 @@ class Game {
 			output += player.name + ": " + player.points + "<br>";
 		}
 		highScoreText.innerHTML = output;
+	}
+
+	printSticks(noOfSticks) {
+		let outputSticks = ``;
+		let stick = `<div class="game__stick"></div>`;
+		for(let i = 1; i<= this.counter; i++){
+			outputSticks += stick;
+		}
+		board.innerHTML = outputSticks;
 	}
 }
 
