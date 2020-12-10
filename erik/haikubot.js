@@ -47,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		[
 			'hoppar',
 			'går',
-			'ligger',
 			'skuttar',
 			'sitter',
 			'glider',
