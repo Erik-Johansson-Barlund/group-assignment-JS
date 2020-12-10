@@ -101,12 +101,11 @@ class Game {
 	printHighScore() {
 		let output = '';
 		let sorted = this.highscore.sort((a, b) => b.points - a.points);
-		let i = sorted.length ?;
-		for (let player = 0; player < 10; player++) {
+		let listSize = sorted.length >= 10 ? 10 : sorted.length;
+		for (let player = 0; player < listSize; player++) {
 			output +=
-				sorted[player].name + ': ' + sorted[player].points + '<br>';
-		
-	}  
+				sorted[player].name + ': ' + sorted[player].points + '<br>';	
+		}  
 		highScoreText.innerHTML = output;
 	}
 
