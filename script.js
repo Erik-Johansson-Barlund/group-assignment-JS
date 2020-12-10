@@ -73,6 +73,8 @@ class Game {
 		btnStart.disabled = false;
 		let winner = this.turn ? this.player1 : this.player2;
 		board.innerHTML = '<h4>' + winner + ' vann!</h4>';
+		playerText.innerHTML = "Start";
+		infoText.innerHTML = "Tryck start för nytt spel";
 		let notInHiScore = true;
 		for (let player of this.highscore) {
 			if (player.name == winner) {

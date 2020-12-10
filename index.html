@@ -12,20 +12,34 @@
     <div class="container">
         <nav>
             <ul>
-                <li><a href="index.html">Start</a></li>
-                <li><a href="game.html">Spel</a></li>
+                <li><a href="index.html">Spel</a></li>
                 <li><a href="aki.html">Aki</a></li>
                 <li><a href="erik/erik.html">Erik</a></li>
                 <li><a href="christian.html">Christian</a></li>
             </ul>
         </nav>
 
-        <section>
-            <h1>Startsida</h1>
-            <p>Lite text</p>
+        <section class="game">
+            <button class="game__button game__button--start" id="btnStart">START NEW GAME</button>
+            <div class="game game__board game__flexrow" id="board">
+            </div>
+            <div class="game game__actions" id="actions">
+                <h4 id="playertext">Start</h4>
+                <p id="infotext">Tryck start för nytt spel</p>
+                <div class="game__flexrow">
+                    <button class="game__button game__button--action" id="btn1">1</button>
+                    <button class="game__button game__button--action" id="btn2">2</button>
+                    <button class="game__button game__button--action" id="btn3">3</button>
+                </div>
+            </div>
+            <div class="game game__highscore">
+                <h5>Highscore</h5>
+                <span id="hiscore"></span>
+            </div>
         </section>
     </div>
-    <script type="text/javascript" src="script.js"></script>
+    <script src="script.js"></script>
+
 </body>
 
 </html>
