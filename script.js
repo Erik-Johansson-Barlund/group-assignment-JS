@@ -6,17 +6,9 @@ class Game {
 		this.player1 = '';
 		this.player2 = '';
 		this.stickArray = [];
-
-		//this.startGame();
 	}
 	removeSticks() {
 		let noOfSticks = 0;
-		console.log('event target id removeStics: ' + event.target.id);
-		/*
-		if (event.target.id == "btn1") { noOfSticks = 1; }
-		if (event.target.id == "btn2") { noOfSticks = 2; }
-		if (event.target.id == "btn3") { noOfSticks = 3; }
-		*/
 		if (event.target.id == 'btn1') {
 			noOfSticks = 1;
 			this.stickArray.pop();
@@ -29,17 +21,18 @@ class Game {
 			noOfSticks = 3;
 			this.stickArray.splice(this.stickArray.length - 3, 3);
 		}
-		//console.log('No of sticks to remove: ' + noOfSticks);
 		this.counter -= noOfSticks;
-		/*HÄR*/ board.innerHTML = this.counter + ' Stickor kvar';
-		/*HÄR*/ board.innerHTML += this.stickArray.join('');
-		console.log('this counter from removeSticks: ' + this.counter);
-		//this.printSticks(this.counter);
+		board.innerHTML =
+			'<div class="stickText">' + this.counter + ' Stickor kvar</div>';
+		board.innerHTML += this.stickArray.join('');
+
 		if (this.counter > 1) {
 			this.turn = this.turn ? false : true;
 			if (this.turn) {
+				infoText.innerHTML = `${this.player2} tog ${noOfSticks} pinnar. Hur många vill du ta?`;
 				playerText.innerHTML = `${this.player1}s tur`;
 			} else {
+				infoText.innerHTML = `${this.player1} tog ${noOfSticks} pinnar. Hur många vill du ta?`;
 				playerText.innerHTML = `${this.player2}s tur`;
 			}
 		} else {
@@ -51,9 +44,12 @@ class Game {
 		this.counter = 21;
 		this.turn = true;
 		this.turn = Math.round(Math.random());
-		console.log('turn ' + this.turn);
+		infoText.innerHTML = 'Hur många pinnar vill du ta?';
 		btnStart.disabled = true;
-		/*HÄR*/ this.setupSticks();
+		btn1.style.visibility = 'visible';
+		btn2.style.visibility = 'visible';
+		btn3.style.visibility = 'visible';
+		this.setupSticks();
 		if (this.player1 == '') {
 			while (this.player1 === '') {
 				this.player1 = prompt('Namn för spelare 1');
@@ -66,17 +62,17 @@ class Game {
 				location.reload();
 			console.log(this.player2);
 		}
-
 		if (this.turn) playerText.innerHTML = `${this.player1}s tur`;
 		else playerText.innerHTML = `${this.player2}s tur`;
-		//this.printSticks(this.counter);
-		/*HÄR*/ board.innerHTML = this.counter + ' Stickor kvar';
-		/*HÄR*/ board.innerHTML += this.stickArray.join('');
+		board.innerHTML =
+			'<div class="stickText">' + this.counter + ' Stickor kvar</div>';
+		board.innerHTML += this.stickArray.join('');
 	}
 
 	endGame() {
+		btnStart.disabled = false;
 		let winner = this.turn ? this.player1 : this.player2;
-		board.innerHTML = winner + ' vann!';
+		board.innerHTML = '<h4>' + winner + ' vann!</h4>';
 		let notInHiScore = true;
 		for (let player of this.highscore) {
 			if (player.name == winner) {
@@ -89,12 +85,12 @@ class Game {
 		if (notInHiScore) {
 			this.highscore.push(new hiScoreEntry(winner));
 		}
-
 		this.printHighScore();
+		btn1.style.visibility = 'hidden';
+		btn2.style.visibility = 'hidden';
+		btn3.style.visibility = 'hidden';
 
-		btnStart.disabled = false;
-
-		let playAgain = confirm('Vill du spela igen?');
+		let playAgain = confirm(`${winner} vann. Vill du spela igen?`);
 		if (playAgain) this.startGame();
 		else {
 			this.player1 = '';
@@ -104,22 +100,13 @@ class Game {
 
 	printHighScore() {
 		let output = '';
-		this.highscore.sort((a, b) => a.points - b.points);
-		for (let player of this.highscore) {
+		let sorted = this.highscore.sort((a, b) => b.points - a.points);
+		for (let player of sorted) {
 			output += player.name + ': ' + player.points + '<br>';
 		}
 		highScoreText.innerHTML = output;
 	}
-	/*
-	printSticks(noOfSticks) {
-		let outputSticks = ``;
-		let stick = `<div class="game__stick"></div>`;
-		for(let i = 1; i<= this.counter; i++){
-			outputSticks += stick;
-		}
-		board.innerHTML = outputSticks;
-	}
-*/
+
 	setupSticks() {
 		this.stickArray = [];
 		for (let i = 0; i < this.counter; i++) {
@@ -130,7 +117,6 @@ class Game {
 		}
 	}
 }
-
 class hiScoreEntry {
 	constructor(name, points = 2) {
 		this.name = name;
@@ -141,6 +127,7 @@ class hiScoreEntry {
 let board;
 let playerText;
 let btnStart;
+let infoText;
 let btn1;
 let btn2;
 let btn3;
@@ -150,27 +137,26 @@ document.addEventListener('DOMContentLoaded', function (e) {
 	board = document.getElementById('board');
 	highScoreText = document.getElementById('hiscore');
 	playerText = document.getElementById('playertext');
+	infoText = document.getElementById('infotext');
 	btnStart = document.getElementById('btnStart');
 	btn1 = document.getElementById('btn1');
 	btn2 = document.getElementById('btn2');
 	btn3 = document.getElementById('btn3');
+	btn1.style.visibility = 'hidden';
+	btn2.style.visibility = 'hidden';
+	btn3.style.visibility = 'hidden';
 	myGame = new Game();
-	//myGame.startGame(); körs i constructorn
 
 	btnStart.addEventListener('click', () => {
-		console.log('Knapp start');
 		myGame.startGame();
 	});
 	btn1.addEventListener('click', () => {
-		console.log('Knapp 1 trycks');
 		myGame.removeSticks();
 	});
 	btn2.addEventListener('click', () => {
-		console.log('Knapp 2 trycks');
 		myGame.removeSticks();
 	});
 	btn3.addEventListener('click', () => {
-		console.log('Knapp 3 trycks');
 		myGame.removeSticks();
 	});
 });
