@@ -150,6 +150,11 @@ button {
 	font-weight: bold;
 }
 
+.game__button:hover {
+	cursor: pointer;
+	filter: brightness(1.25);
+}
+
 .game__button--action {
 	align-items: center;
 	background-color: #993333;

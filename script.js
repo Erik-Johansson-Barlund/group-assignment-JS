@@ -21,11 +21,15 @@ class Game {
 			noOfSticks = 3;
 			this.stickArray.splice(this.stickArray.length - 3, 3);
 		}
+		let lastCount = this.counter;
 		this.counter -= noOfSticks;
 		board.innerHTML =
 			'<div class="stickText">' + this.counter + ' Stickor kvar</div>';
 		board.innerHTML += this.stickArray.join('');
-
+		if (noOfSticks >= lastCount) {
+			this.turn = this.turn ? false : true;
+			this.endGame();
+		}
 		if (this.counter > 1) {
 			this.turn = this.turn ? false : true;
 			if (this.turn) {
@@ -40,28 +44,34 @@ class Game {
 		}
 	}
 
+	setupPlayers(){
+		if (this.player1 == '') {
+			while (this.player1 === '') {
+				this.player1 = prompt('Namn för spelare 1');
+			}
+			while (this.player2 === '') {
+				this.player2 = prompt('Namn för spelare 2');
+			}
+			if (this.player1 === null || this.player2 === null){
+				this.player1 = '';
+				this.player2 = '';
+				alert("Bägge spelarna måste ha ett namn.")
+			} else 
+				this.startGame();
+		}
+	}
+
 	startGame() {
 		this.counter = 21;
 		this.turn = true;
 		this.turn = Math.round(Math.random());
 		infoText.innerHTML = 'Hur många pinnar vill du ta?';
-		btnStart.disabled = true;
-		btn1.style.visibility = 'visible';
-		btn2.style.visibility = 'visible';
-		btn3.style.visibility = 'visible';
+		btnStart.style.display = 'none';
+		btn1.style.display = 'block';
+		btn2.style.display = 'block';
+		btn3.style.display = 'block';
 		this.setupSticks();
-		if (this.player1 == '') {
-			while (this.player1 === '') {
-				this.player1 = prompt('Namn för spelare 1');
-			}
-			console.log(this.player1);
-			while (this.player2 === '') {
-				this.player2 = prompt('Namn för spelare 2');
-			}
-			if (this.player1 === null || this.player2 === null)
-				location.reload();
-			console.log(this.player2);
-		}
+
 		if (this.turn) playerText.innerHTML = `${this.player1}s tur`;
 		else playerText.innerHTML = `${this.player2}s tur`;
 		board.innerHTML =
@@ -70,7 +80,6 @@ class Game {
 	}
 
 	endGame() {
-		btnStart.disabled = false;
 		let winner = this.turn ? this.player1 : this.player2;
 		board.innerHTML = '<h4>' + winner + ' vann!</h4>';
 		playerText.innerHTML = "Start";
@@ -80,7 +89,6 @@ class Game {
 			if (player.name == winner) {
 				player.points += 2;
 				notInHiScore = false;
-				console.log('Found player in highscore' + player.points);
 				break;
 			}
 		}
@@ -88,10 +96,11 @@ class Game {
 			this.highscore.push(new hiScoreEntry(winner));
 		}
 		this.printHighScore();
-		btn1.style.visibility = 'hidden';
-		btn2.style.visibility = 'hidden';
-		btn3.style.visibility = 'hidden';
-
+		btn1.style.display = 'none';
+		btn2.style.display = 'none';
+		btn3.style.display = 'none';
+		btnStart.style.display = 'block';
+		
 		let playAgain = confirm(`${winner} vann. Vill du spela igen?`);
 		if (playAgain) this.startGame();
 		else {
@@ -146,13 +155,13 @@ document.addEventListener('DOMContentLoaded', function (e) {
 	btn1 = document.getElementById('btn1');
 	btn2 = document.getElementById('btn2');
 	btn3 = document.getElementById('btn3');
-	btn1.style.visibility = 'hidden';
-	btn2.style.visibility = 'hidden';
-	btn3.style.visibility = 'hidden';
+	btn1.style.display = 'none';
+	btn2.style.display = 'none';
+	btn3.style.display = 'none';
 	myGame = new Game();
 
 	btnStart.addEventListener('click', () => {
-		myGame.startGame();
+		myGame.setupPlayers();
 	});
 	btn1.addEventListener('click', () => {
 		myGame.removeSticks();
