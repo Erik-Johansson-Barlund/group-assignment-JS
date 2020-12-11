@@ -30,7 +30,7 @@ class Game {
 			this.turn = this.turn ? false : true;
 			this.endGame();
 		}
-		if (this.counter > 1) {
+		if (this.counter >= 1) {
 			this.turn = this.turn ? false : true;
 			if (this.turn) {
 				infoText.innerHTML = `${this.player2} tog ${noOfSticks} pinnar. Hur många vill du ta?`;
@@ -39,8 +39,6 @@ class Game {
 				infoText.innerHTML = `${this.player1} tog ${noOfSticks} pinnar. Hur många vill du ta?`;
 				playerText.innerHTML = `${this.player2}s tur`;
 			}
-		} else {
-			this.endGame();
 		}
 	}
 
