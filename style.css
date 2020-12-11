@@ -99,6 +99,48 @@ button {
 	background-color: #fff;
 }
 
+.game_splash_title {
+	font-family: 'Jacques Francois Shadow', cursive;
+	font-size: 6em;
+	color: #003366;
+	text-shadow: 1px 1px 2px rgba(237, 117, 26, 0.688);
+	margin-top: -10px;
+	margin-bottom: -15px;
+}
+.circle {
+	min-height: 150px;
+	padding: 10px 5px 0px 5px;
+	border-radius: 40%;
+	background-image: linear-gradient(
+		70deg,
+		rgba(255, 255, 255, 0),
+		rgba(235, 206, 94, 0.2),
+		rgba(248, 248, 247, 0)
+	);
+}
+.circle__one {
+	width: 30%;
+	margin-top: 20px;
+	margin-bottom: -10px;
+	transform: rotate(-5deg);
+}
+.circle__two {
+	width: 33%;
+	margin-top: 5px;
+	background-image: linear-gradient(
+		110deg,
+		rgba(255, 255, 255, 0),
+		rgba(248, 134, 12, 0.2),
+		rgba(248, 248, 247, 0)
+	);
+}
+.circle__three {
+	width: 30%;
+	margin-top: 20px;
+	margin-bottom: -10px;
+	transform: rotate(5deg);
+}
+
 .game__button {
 	border: none;
 	border-radius: 5px;
