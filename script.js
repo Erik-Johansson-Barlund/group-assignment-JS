@@ -7,6 +7,7 @@ class Game {
 		this.player2 = '';
 		this.stickArray = [];
 	}
+	/* Spelloopen */
 	removeSticks() {
 		let noOfSticks = 0;
 		if (event.target.id == 'btn1') {
@@ -24,7 +25,7 @@ class Game {
 		let lastCount = this.counter;
 		this.counter -= noOfSticks;
 		board.innerHTML =
-			'<div class="stickText">' + this.counter + ' Stickor kvar</div>';
+			'<div class="stickText">' + this.counter + ' Pinnar kvar</div>';
 		board.innerHTML += this.stickArray.join('');
 		if (noOfSticks >= lastCount) {
 			this.turn = this.turn ? false : true;
@@ -41,8 +42,8 @@ class Game {
 			}
 		}
 	}
-
-	setupPlayers(){
+	/* Kontroll av input vid namninskrivning */
+	setupPlayers() {
 		if (this.player1 == '') {
 			while (this.player1 === '') {
 				this.player1 = prompt('Namn för spelare 1');
@@ -50,15 +51,14 @@ class Game {
 			while (this.player2 === '') {
 				this.player2 = prompt('Namn för spelare 2');
 			}
-			if (this.player1 === null || this.player2 === null){
+			if (this.player1 === null || this.player2 === null) {
 				this.player1 = '';
 				this.player2 = '';
-				alert("Bägge spelarna måste ha ett namn.")
-			} else 
-				this.startGame();
+				alert('Bägge spelarna måste ha ett namn.');
+			} else this.startGame();
 		}
 	}
-
+	/* Sätter upp en ny omgång av spelet */
 	startGame() {
 		this.counter = 21;
 		this.turn = true;
@@ -73,15 +73,18 @@ class Game {
 		if (this.turn) playerText.innerHTML = `${this.player1}s tur`;
 		else playerText.innerHTML = `${this.player2}s tur`;
 		board.innerHTML =
-			'<div class="stickText">' + this.counter + ' Stickor kvar</div>';
+			'<div class="stickText">' + this.counter + ' Pinnar kvar</div>';
 		board.innerHTML += this.stickArray.join('');
 	}
-
+	/* Logiken för att avsluta en spelomgång */
 	endGame() {
 		let winner = this.turn ? this.player1 : this.player2;
-		board.innerHTML = '<h4>' + winner + ' vann!</h4>';
-		playerText.innerHTML = "Start";
-		infoText.innerHTML = "Tryck start för nytt spel";
+		board.innerHTML =
+			'<div class="winner"><h4>' +
+			winner +
+			' vann!</h4><img src="cup.png"></div>';
+		playerText.innerHTML = 'Spela igen?';
+		infoText.innerHTML = 'Tryck start för nytt spel';
 		let notInHiScore = true;
 		for (let player of this.highscore) {
 			if (player.name == winner) {
@@ -98,7 +101,7 @@ class Game {
 		btn2.style.display = 'none';
 		btn3.style.display = 'none';
 		btnStart.style.display = 'block';
-		
+
 		let playAgain = confirm(`${winner} vann. Vill du spela igen?`);
 		if (playAgain) this.startGame();
 		else {
@@ -106,18 +109,18 @@ class Game {
 			this.player2 = '';
 		}
 	}
-
+	/* Uppdaterar highscore efter varje spelomgång */
 	printHighScore() {
 		let output = '';
 		let sorted = this.highscore.sort((a, b) => b.points - a.points);
 		let listSize = sorted.length >= 10 ? 10 : sorted.length;
 		for (let player = 0; player < listSize; player++) {
 			output +=
-				sorted[player].name + ': ' + sorted[player].points + '<br>';	
-		}  
+				sorted[player].name + ': ' + sorted[player].points + '<br>';
+		}
 		highScoreText.innerHTML = output;
 	}
-
+	/* Skapar arrayen som håller reda på de grafiska pinnelementen */
 	setupSticks() {
 		this.stickArray = [];
 		for (let i = 0; i < this.counter; i++) {

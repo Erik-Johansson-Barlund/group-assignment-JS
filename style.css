@@ -140,7 +140,11 @@ button {
 	margin-bottom: -10px;
 	transform: rotate(5deg);
 }
-
+.winner {
+	display: flex;
+	flex-direction: column;
+	margin-top: 40px;
+}
 .game__button {
 	border: none;
 	border-radius: 5px;
